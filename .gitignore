@@ -3,5 +3,6 @@ local.properties
 gradle/
 .idea/
 .gradle/
+captures/
 
 
