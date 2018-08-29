@@ -1,16 +1,14 @@
 package com.segment.ui;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
 import com.segment.lib.core.ActionBarLayout;
 import com.segment.lib.core.BaseSegment;
+import com.segment.ui.segment.TestSegment;
 
 import java.util.ArrayList;
 
