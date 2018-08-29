@@ -1,2 +1,2 @@
 # segment
-a fast and smart ui from telegram
+a fast and smart ui from telegram for android
