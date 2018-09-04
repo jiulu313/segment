@@ -25,7 +25,7 @@ public class MainActivity extends Activity implements ActionBarLayout.ActionBarL
         actionBarLayout.setDelegate(this);
 
 //        actionBarLayout.setBottomBar(createBottomBar());
-        actionBarLayout.setBottomBarHeight(240);
+//        actionBarLayout.setBottomBarHeight(240);
 
         actionBarLayout.presentFragment(new TestSegment());
         setContentView(actionBarLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));

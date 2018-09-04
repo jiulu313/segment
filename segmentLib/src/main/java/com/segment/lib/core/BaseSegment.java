@@ -19,7 +19,7 @@ import com.segment.lib.util.ConnectionsManager;
  * Created by zhanghongjun on 2018/3/15.
  */
 
-public class BaseSegment extends Segment{
+public class BaseSegment  {
     protected String TAG = getClass().getSimpleName();
 
     private boolean isFinished = false;
@@ -50,9 +50,9 @@ public class BaseSegment extends Segment{
 
         int layoutId = getLayoutId();
         if( layoutId != -1){
-            View root = LayoutInflater.from(context).inflate(layoutId,null);
-            initView(root);
-            return root;
+            fragmentView = LayoutInflater.from(context).inflate(layoutId,null);
+            initView(fragmentView);
+            return fragmentView;
         }else {
             return null;
         }
