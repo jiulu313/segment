@@ -22,4 +22,9 @@ public class MainSegment extends BaseSegment{
             }
         });
     }
+
+    @Override
+    public boolean onBackPressed() {
+        return true;
+    }
 }

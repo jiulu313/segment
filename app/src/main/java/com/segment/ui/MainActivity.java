@@ -32,6 +32,10 @@ public class MainActivity extends Activity implements ActionBarLayout.ActionBarL
 
     }
 
+    @Override
+    public void onBackPressed() {
+        actionBarLayout.onBackPressed();
+    }
 
     @Override
     public boolean onPreIme() {
@@ -50,13 +54,21 @@ public class MainActivity extends Activity implements ActionBarLayout.ActionBarL
     @Override
     public boolean needAddFragmentToStack(BaseSegment fragment, ActionBarLayout layout) {
         Log.d("which2","needAddFragmentToStack...");
+
+
+
         return true;
     }
 
     @Override
     public boolean needCloseLastFragment(ActionBarLayout layout) {
         Log.d("which2","needCloseLastFragment...");
-        return false;
+        if(actionBarLayout.fragmentsStack.size() <= 1){
+            finish();
+            return false;
+        }
+
+        return true;
     }
 
     @Override
