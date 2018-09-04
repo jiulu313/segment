@@ -19,6 +19,7 @@ public class MainSegment extends BaseSegment{
             @Override
             public void onClick(View v) {
                 Toast.makeText(getParentActivity(),"我是主界面",Toast.LENGTH_SHORT).show();
+                presentFragment(new DetailSegment());
             }
         });
     }

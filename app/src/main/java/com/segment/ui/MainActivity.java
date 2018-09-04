@@ -12,7 +12,7 @@ import android.view.Window;
 
 import com.segment.lib.core.ActionBarLayout;
 import com.segment.lib.core.BaseSegment;
-import com.segment.ui.segment.TestSegment;
+import com.segment.ui.segment.SplashSegment;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class MainActivity extends Activity implements ActionBarLayout.ActionBarL
 //        actionBarLayout.setBottomBar(createBottomBar());
 //        actionBarLayout.setBottomBarHeight(240);
 
-        actionBarLayout.presentFragment(new TestSegment());
+        actionBarLayout.presentFragment(new SplashSegment());
         setContentView(actionBarLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
     }
