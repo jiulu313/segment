@@ -89,8 +89,6 @@ public class ActionBarLayout extends FrameLayout {
 
     private LinearLayoutContainer containerView;
     private LinearLayoutContainer containerViewBack;
-//    private DrawerLayoutContainer drawerLayoutContainer;
-//    private ActionBar currentActionBar;
 
     private AnimatorSet currentAnimation;
     private DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator(1.5f);
@@ -122,12 +120,8 @@ public class ActionBarLayout extends FrameLayout {
     private float animationProgress = 0.0f;
     private long lastFrameTime;
 
-    private String titleOverlayText;
-    private String subtitleOverlayText;
-    private Runnable overlayAction;
-
     private ActionBarLayoutDelegate delegate = null;
-    protected Activity parentActivity = null;
+    protected Activity parentActivity;
 
     public ArrayList<BaseSegment> fragmentsStack = new ArrayList<>();
 
@@ -138,21 +132,14 @@ public class ActionBarLayout extends FrameLayout {
 
     public void init(ArrayList<BaseSegment> stack) {
         fragmentsStack = stack;
-        containerViewBack = new LinearLayoutContainer(parentActivity);
-        addView(containerViewBack);
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) containerViewBack.getLayoutParams();
-        layoutParams.width = LayoutHelper.MATCH_PARENT;
-        layoutParams.height = LayoutHelper.MATCH_PARENT;
-        layoutParams.gravity = Gravity.TOP | Gravity.LEFT;
-        containerViewBack.setLayoutParams(layoutParams);
 
+        //初始化containerViewBack
+        containerViewBack = new LinearLayoutContainer(parentActivity);
+        addView(containerViewBack,LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT,LayoutHelper.MATCH_PARENT,Gravity.TOP | Gravity.LEFT));
+
+        //初始化containerView
         containerView = new LinearLayoutContainer(parentActivity);
-        addView(containerView);
-        layoutParams = (FrameLayout.LayoutParams) containerView.getLayoutParams();
-        layoutParams.width = LayoutHelper.MATCH_PARENT;
-        layoutParams.height = LayoutHelper.MATCH_PARENT;
-        layoutParams.gravity = Gravity.TOP | Gravity.LEFT;
-        containerView.setLayoutParams(layoutParams);
+        addView(containerView,LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT,LayoutHelper.MATCH_PARENT,Gravity.TOP | Gravity.LEFT));
 
         for (BaseSegment fragment : fragmentsStack) {
             fragment.setParentLayout(this);
@@ -1085,17 +1072,6 @@ public class ActionBarLayout extends FrameLayout {
         removeActionBarExtraHeight = value;
     }
 
-    public void setTitleOverlayText(String title, String subtitle, Runnable action) {
-        titleOverlayText = title;
-        subtitleOverlayText = subtitle;
-        overlayAction = action;
-//        for (int a = 0; a < fragmentsStack.size(); a++) {
-//            BaseSegment fragment = fragmentsStack.get(a);
-//            if (fragment.actionBar != null) {
-//                fragment.actionBar.setTitleOverlayText(titleOverlayText, subtitleOverlayText, action);
-//            }
-//        }
-    }
 
     public boolean extendActionMode(Menu menu) {
         return !fragmentsStack.isEmpty() && fragmentsStack.get(fragmentsStack.size() - 1).extendActionMode(menu);

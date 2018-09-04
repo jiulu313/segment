@@ -1,8 +1,12 @@
 package com.segment.ui;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.ViewGroup;
 import android.view.Window;
 
@@ -33,8 +37,76 @@ public class MainActivity extends Activity implements ActionBarLayout.ActionBarL
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        BaseSegment lastSegment = null;
+        if (!actionBarLayout.fragmentsStack.isEmpty()) {
+            lastSegment = actionBarLayout.fragmentsStack.get(actionBarLayout.fragmentsStack.size() - 1);
+
+            if (lastSegment != null) {
+                Bundle args = lastSegment.getArguments();
+                lastSegment.saveSelfArgs(args);
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        actionBarLayout.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        actionBarLayout.onResume();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (actionBarLayout.fragmentsStack.size() != 0) {
+            BaseSegment segment = actionBarLayout.fragmentsStack.get(actionBarLayout.fragmentsStack.size() - 1);
+            segment.onActivityResultFragment(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (actionBarLayout.fragmentsStack.size() != 0) {
+            BaseSegment segment = actionBarLayout.fragmentsStack.get(actionBarLayout.fragmentsStack.size() - 1);
+            segment.onRequestPermissionsResultFragment(requestCode, permissions, grantResults);
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        actionBarLayout.onConfigurationChanged(newConfig);
+    }
+
+    @Override
     public void onBackPressed() {
         actionBarLayout.onBackPressed();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        actionBarLayout.onLowMemory();
+    }
+
+    @Override
+    public void onActionModeStarted(ActionMode mode) {
+        super.onActionModeStarted(mode);
+        actionBarLayout.onActionModeStarted(mode);
+    }
+
+    @Override
+    public void onActionModeFinished(ActionMode mode) {
+        super.onActionModeFinished(mode);
+        actionBarLayout.onActionModeFinished(mode);
     }
 
     @Override
