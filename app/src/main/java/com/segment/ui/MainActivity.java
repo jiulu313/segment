@@ -12,6 +12,7 @@ import android.view.Window;
 
 import com.segment.lib.core.ActionBarLayout;
 import com.segment.lib.core.BaseSegment;
+import com.segment.lib.util.AndroidUtilities;
 import com.segment.ui.segment.SplashSegment;
 
 import java.util.ArrayList;
@@ -23,6 +24,12 @@ public class MainActivity extends Activity implements ActionBarLayout.ActionBarL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        //获取状态栏高度
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            AndroidUtilities.statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+        }
 
         actionBarLayout = new ActionBarLayout(this);
         actionBarLayout.init(new ArrayList<BaseSegment>());
