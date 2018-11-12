@@ -2,11 +2,13 @@ package com.segment.ui.segment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
 import com.segment.lib.core.BaseSegment;
 import com.segment.ui.R;
+import com.segment.ui.TestActivity;
 
 
 public class SplashSegment extends BaseSegment {
@@ -23,9 +25,21 @@ public class SplashSegment extends BaseSegment {
         root.findViewById(R.id.btn_login_in_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long t1 = System.currentTimeMillis();
                 presentFragment(new LoginSegment());
+                Log.e("time","time=" + (System.currentTimeMillis() - t1));
             }
         });
+
+        root.findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long t1 = System.currentTimeMillis();
+                parentLayout.startActivityForResult(new Intent(getParentActivity(),TestActivity.class),100);
+                Log.e("time","time2=" + (System.currentTimeMillis() - t1));
+            }
+        });
+
     }
 
     @Override

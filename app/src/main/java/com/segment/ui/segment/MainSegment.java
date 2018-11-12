@@ -1,10 +1,12 @@
 package com.segment.ui.segment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.segment.lib.core.BaseSegment;
 import com.segment.ui.R;
+import com.segment.ui.TestActivity;
 
 public class MainSegment extends BaseSegment{
     @Override
@@ -22,6 +24,16 @@ public class MainSegment extends BaseSegment{
                 presentFragment(new DetailSegment());
             }
         });
+
+        root.findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getParentActivity(),TestActivity.class);
+                parentLayout.startActivityForResult(intent,100);
+            }
+        });
+
+
     }
 
     @Override

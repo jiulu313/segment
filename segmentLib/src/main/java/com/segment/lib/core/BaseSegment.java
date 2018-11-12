@@ -49,13 +49,13 @@ public class BaseSegment  {
         Log.e("which",TAG + " == createView");
 
         int layoutId = getLayoutId();
-        if( layoutId != -1){
-            fragmentView = LayoutInflater.from(context).inflate(layoutId,null);
-            initView(fragmentView);
-            return fragmentView;
-        }else {
-            return null;
+        if( layoutId == -1){
+            throw new RuntimeException("layoutId must not be -1");
         }
+
+        fragmentView = LayoutInflater.from(context).inflate(layoutId,null);
+        initView(fragmentView);
+        return fragmentView;
     }
 
 
